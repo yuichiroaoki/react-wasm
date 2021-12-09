@@ -1,8 +1,16 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { getWasmModule } from './utils/wasm-import';
 
 function App() {
+  const runWasm = async () => {
+    const wasmpack = await getWasmModule()
+
+    wasmpack.greet()
+  }
+
+  runWasm()
   return (
     <div className="App">
       <header className="App-header">

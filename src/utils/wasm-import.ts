@@ -1,9 +1,12 @@
-export const getWasmAgent = async () => {
-	const module = await import('wasm');
-	return module;
+export const getWasmModule = async () => {
+	const init = await import('wasm-pkg');
+	await init();
+	const { initThreadPool } = init;
+	await initThreadPool(navigator.hardwareConcurrency);
+	return init;
 }
 
 export const getWasmMemory = async () => {
-	const module = await import('wasm/wasm_agent_bg.wasm');
+	const module = await import('wasm-pkg/wasm_bg.wasm');
 	return module;
 }
